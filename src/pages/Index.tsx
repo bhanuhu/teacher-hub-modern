@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { 
   User, 
   Mail, 
@@ -21,7 +22,8 @@ import {
   Settings,
   BookOpen,
   History,
-  MessageCircle
+  MessageCircle,
+  Send
 } from "lucide-react";
 import TeacherProfile from "@/components/TeacherProfile";
 import QualificationsSection from "@/components/QualificationsSection";
@@ -30,6 +32,43 @@ import StudentsSection from "@/components/StudentsSection";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("profile");
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState([
+    { id: 1, date: "2024-01-15", author: "Admin", text: "Excellent progress with new students this month." },
+    { id: 2, date: "2024-01-10", author: "Supervisor", text: "Student feedback has been very positive." },
+  ]);
+
+  const scheduleData = [
+    { date: "2024-01-22", time: "9:00 AM", student: "Sarah M.", type: "Vocal Contemporary", status: "Confirmed" },
+    { date: "2024-01-22", time: "2:00 PM", student: "James K.", type: "Vocal Pop", status: "Confirmed" },
+    { date: "2024-01-23", time: "9:30 AM", student: "Emily R.", type: "Vocal Hybrid", status: "Pending" },
+    { date: "2024-01-24", time: "10:00 AM", student: "Lisa P.", type: "Instrument", status: "Confirmed" },
+  ];
+
+  const historyData = [
+    { date: "2024-01-15", event: "New student enrolled", details: "Sarah M. - Vocal Contemporary" },
+    { date: "2024-01-12", event: "Qualification added", details: "Vocal Pop certification" },
+    { date: "2024-01-10", event: "Schedule updated", details: "Added evening slots" },
+    { date: "2024-01-08", event: "Profile updated", details: "Contact information changed" },
+    { date: "2024-01-05", event: "New group class", details: "Ensemble Coaching started" },
+  ];
+
+  const handleAddComment = () => {
+    if (newComment.trim()) {
+      const comment = {
+        id: comments.length + 1,
+        date: new Date().toISOString().split('T')[0],
+        author: "Current User",
+        text: newComment
+      };
+      setComments([comment, ...comments]);
+      setNewComment("");
+    }
+  };
+
+  const handleEditProfile = () => {
+    setActiveTab("profile");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
@@ -93,7 +132,11 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              <Button variant="secondary" className="bg-white/20 text-white border-white/30 hover:bg-white/30">
+              <Button 
+                variant="secondary" 
+                className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                onClick={handleEditProfile}
+              >
                 <Edit2 className="w-4 h-4 mr-2" />
                 Edit Profile
               </Button>
@@ -159,7 +202,41 @@ const Index = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600">Schedule management interface coming soon...</p>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold">Upcoming Lessons</h3>
+                    <Button size="sm">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add Lesson
+                    </Button>
+                  </div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Time</TableHead>
+                        <TableHead>Student</TableHead>
+                        <TableHead>Type</TableHead>
+                        <TableHead>Status</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {scheduleData.map((lesson, index) => (
+                        <TableRow key={index}>
+                          <TableCell>{lesson.date}</TableCell>
+                          <TableCell>{lesson.time}</TableCell>
+                          <TableCell>{lesson.student}</TableCell>
+                          <TableCell>{lesson.type}</TableCell>
+                          <TableCell>
+                            <Badge variant={lesson.status === 'Confirmed' ? 'default' : 'secondary'}>
+                              {lesson.status}
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -173,7 +250,34 @@ const Index = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600">Comments section coming soon...</p>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="newComment">Add a comment</Label>
+                    <div className="flex gap-2">
+                      <Textarea
+                        id="newComment"
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                        placeholder="Write a comment or note..."
+                        className="flex-1"
+                      />
+                      <Button onClick={handleAddComment} size="sm">
+                        <Send className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    {comments.map((comment) => (
+                      <div key={comment.id} className="p-4 bg-slate-50 rounded-lg">
+                        <div className="flex justify-between items-start mb-2">
+                          <span className="font-medium text-slate-900">{comment.author}</span>
+                          <span className="text-sm text-slate-500">{comment.date}</span>
+                        </div>
+                        <p className="text-slate-700">{comment.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -187,7 +291,20 @@ const Index = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600">History section coming soon...</p>
+                <div className="space-y-3">
+                  {historyData.map((item, index) => (
+                    <div key={index} className="flex items-start gap-4 p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                      <div className="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className="font-medium text-slate-900">{item.event}</h4>
+                          <span className="text-sm text-slate-500">{item.date}</span>
+                        </div>
+                        <p className="text-slate-600">{item.details}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </TabsContent>

@@ -38,27 +38,37 @@ const QualificationsSection = () => {
 
   const [isAddingPrivate, setIsAddingPrivate] = useState(false);
   const [isAddingGroup, setIsAddingGroup] = useState(false);
-  const [newQualification, setNewQualification] = useState({ name: '', rate: '' });
+  const [newPrivateQualification, setNewPrivateQualification] = useState({ name: '', rate: '' });
+  const [newGroupQualification, setNewGroupQualification] = useState({ name: '', rate: '' });
 
-  const handleAddQualification = (type: 'private' | 'group') => {
-    if (!newQualification.name || !newQualification.rate) return;
+  const handleAddPrivateQualification = () => {
+    if (!newPrivateQualification.name || !newPrivateQualification.rate) return;
 
     const qualification: Qualification = {
       id: Date.now().toString(),
-      name: newQualification.name,
-      rate: parseFloat(newQualification.rate),
-      type
+      name: newPrivateQualification.name,
+      rate: parseFloat(newPrivateQualification.rate),
+      type: 'private'
     };
 
-    if (type === 'private') {
-      setPrivateQualifications([...privateQualifications, qualification]);
-      setIsAddingPrivate(false);
-    } else {
-      setGroupQualifications([...groupQualifications, qualification]);
-      setIsAddingGroup(false);
-    }
+    setPrivateQualifications([qualification, ...privateQualifications]);
+    setIsAddingPrivate(false);
+    setNewPrivateQualification({ name: '', rate: '' });
+  };
 
-    setNewQualification({ name: '', rate: '' });
+  const handleAddGroupQualification = () => {
+    if (!newGroupQualification.name || !newGroupQualification.rate) return;
+
+    const qualification: Qualification = {
+      id: Date.now().toString(),
+      name: newGroupQualification.name,
+      rate: parseFloat(newGroupQualification.rate),
+      type: 'group'
+    };
+
+    setGroupQualifications([qualification, ...groupQualifications]);
+    setIsAddingGroup(false);
+    setNewGroupQualification({ name: '', rate: '' });
   };
 
   const handleDeleteQualification = (id: string, type: 'private' | 'group') => {
@@ -116,40 +126,46 @@ const QualificationsSection = () => {
 
   const AddQualificationForm = ({ 
     isVisible, 
+    qualification,
+    setQualification,
     onAdd, 
-    onCancel 
+    onCancel,
+    type
   }: { 
-    isVisible: boolean, 
-    onAdd: () => void, 
-    onCancel: () => void 
+    isVisible: boolean;
+    qualification: { name: string; rate: string };
+    setQualification: (qual: { name: string; rate: string }) => void;
+    onAdd: () => void;
+    onCancel: () => void;
+    type: 'private' | 'group';
   }) => {
     if (!isVisible) return null;
 
     return (
-      <div className="p-4 border-2 border-dashed border-slate-300 rounded-lg bg-slate-50">
+      <div className="p-4 border-2 border-dashed border-slate-300 rounded-lg bg-slate-50 mb-4">
         <div className="space-y-3">
           <div>
-            <Label htmlFor="qualName" className="text-sm font-medium">
+            <Label htmlFor={`qualName-${type}`} className="text-sm font-medium">
               Qualification Name
             </Label>
             <Input
-              id="qualName"
-              value={newQualification.name}
-              onChange={(e) => setNewQualification({...newQualification, name: e.target.value})}
+              id={`qualName-${type}`}
+              value={qualification.name}
+              onChange={(e) => setQualification({...qualification, name: e.target.value})}
               placeholder="e.g., Vocal Contemporary"
               className="mt-1"
             />
           </div>
           <div>
-            <Label htmlFor="qualRate" className="text-sm font-medium">
+            <Label htmlFor={`qualRate-${type}`} className="text-sm font-medium">
               Rate per Hour ($)
             </Label>
             <Input
-              id="qualRate"
+              id={`qualRate-${type}`}
               type="number"
               step="0.01"
-              value={newQualification.rate}
-              onChange={(e) => setNewQualification({...newQualification, rate: e.target.value})}
+              value={qualification.rate}
+              onChange={(e) => setQualification({...qualification, rate: e.target.value})}
               placeholder="35.00"
               className="mt-1"
             />
@@ -190,6 +206,17 @@ const QualificationsSection = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
+            <AddQualificationForm 
+              isVisible={isAddingPrivate}
+              qualification={newPrivateQualification}
+              setQualification={setNewPrivateQualification}
+              onAdd={handleAddPrivateQualification}
+              onCancel={() => {
+                setIsAddingPrivate(false);
+                setNewPrivateQualification({ name: '', rate: '' });
+              }}
+              type="private"
+            />
             {privateQualifications.map((qualification) => (
               <QualificationCard 
                 key={qualification.id} 
@@ -197,14 +224,6 @@ const QualificationsSection = () => {
                 onDelete={() => handleDeleteQualification(qualification.id, 'private')}
               />
             ))}
-            <AddQualificationForm 
-              isVisible={isAddingPrivate}
-              onAdd={() => handleAddQualification('private')}
-              onCancel={() => {
-                setIsAddingPrivate(false);
-                setNewQualification({ name: '', rate: '' });
-              }}
-            />
           </div>
         </CardContent>
       </Card>
@@ -230,6 +249,17 @@ const QualificationsSection = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
+            <AddQualificationForm 
+              isVisible={isAddingGroup}
+              qualification={newGroupQualification}
+              setQualification={setNewGroupQualification}
+              onAdd={handleAddGroupQualification}
+              onCancel={() => {
+                setIsAddingGroup(false);
+                setNewGroupQualification({ name: '', rate: '' });
+              }}
+              type="group"
+            />
             {groupQualifications.map((qualification) => (
               <QualificationCard 
                 key={qualification.id} 
@@ -237,14 +267,6 @@ const QualificationsSection = () => {
                 onDelete={() => handleDeleteQualification(qualification.id, 'group')}
               />
             ))}
-            <AddQualificationForm 
-              isVisible={isAddingGroup}
-              onAdd={() => handleAddQualification('group')}
-              onCancel={() => {
-                setIsAddingGroup(false);
-                setNewQualification({ name: '', rate: '' });
-              }}
-            />
           </div>
         </CardContent>
       </Card>

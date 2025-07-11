@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 
 const TeacherProfile = () => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingPersonal, setIsEditingPersonal] = useState(false);
+  const [isEditingContact, setIsEditingContact] = useState(false);
   const [profileData, setProfileData] = useState({
     name: "Alynia Allan",
     role: "Teacher",
@@ -31,15 +32,22 @@ const TeacherProfile = () => {
     bio: "Experienced music teacher specializing in vocal training and contemporary music styles."
   });
 
-  const handleSave = () => {
-    setIsEditing(false);
-    // Here you would typically save to backend
-    console.log("Saving profile data:", profileData);
+  const handleSavePersonal = () => {
+    setIsEditingPersonal(false);
+    console.log("Saving personal data:", profileData);
   };
 
-  const handleCancel = () => {
-    setIsEditing(false);
-    // Reset to original data if needed
+  const handleSaveContact = () => {
+    setIsEditingContact(false);
+    console.log("Saving contact data:", profileData);
+  };
+
+  const handleCancelPersonal = () => {
+    setIsEditingPersonal(false);
+  };
+
+  const handleCancelContact = () => {
+    setIsEditingContact(false);
   };
 
   return (
@@ -52,11 +60,11 @@ const TeacherProfile = () => {
               <User className="w-5 h-5 text-blue-600" />
               Personal Details
             </CardTitle>
-            {!isEditing ? (
+            {!isEditingPersonal ? (
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => setIsEditing(true)}
+                onClick={() => setIsEditingPersonal(true)}
                 className="hover:shadow-md transition-shadow"
               >
                 <Edit2 className="w-4 h-4 mr-2" />
@@ -67,7 +75,7 @@ const TeacherProfile = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  onClick={handleCancel}
+                  onClick={handleCancelPersonal}
                   className="hover:shadow-md transition-shadow"
                 >
                   <X className="w-4 h-4 mr-2" />
@@ -75,7 +83,7 @@ const TeacherProfile = () => {
                 </Button>
                 <Button 
                   size="sm"
-                  onClick={handleSave}
+                  onClick={handleSavePersonal}
                   className="bg-blue-600 hover:bg-blue-700 hover:shadow-md transition-all"
                 >
                   <Save className="w-4 h-4 mr-2" />
@@ -91,7 +99,7 @@ const TeacherProfile = () => {
               <Label htmlFor="name" className="text-sm font-medium text-slate-700">
                 Full Name
               </Label>
-              {isEditing ? (
+              {isEditingPersonal ? (
                 <Input
                   id="name"
                   value={profileData.name}
@@ -106,7 +114,7 @@ const TeacherProfile = () => {
               <Label htmlFor="role" className="text-sm font-medium text-slate-700">
                 Role
               </Label>
-              {isEditing ? (
+              {isEditingPersonal ? (
                 <Input
                   id="role"
                   value={profileData.role}
@@ -128,7 +136,7 @@ const TeacherProfile = () => {
             <Label htmlFor="birthDate" className="text-sm font-medium text-slate-700">
               Birth Date
             </Label>
-            {isEditing ? (
+            {isEditingPersonal ? (
               <Input
                 id="birthDate"
                 type="date"
@@ -145,7 +153,7 @@ const TeacherProfile = () => {
             <Label htmlFor="bio" className="text-sm font-medium text-slate-700">
               Bio
             </Label>
-            {isEditing ? (
+            {isEditingPersonal ? (
               <Textarea
                 id="bio"
                 value={profileData.bio}
@@ -163,10 +171,43 @@ const TeacherProfile = () => {
       {/* Contact Information */}
       <Card className="border-0 shadow-lg">
         <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-2">
-            <Mail className="w-5 h-5 text-green-600" />
-            Contact Information
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <Mail className="w-5 h-5 text-green-600" />
+              Contact Information
+            </CardTitle>
+            {!isEditingContact ? (
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setIsEditingContact(true)}
+                className="hover:shadow-md transition-shadow"
+              >
+                <Edit2 className="w-4 h-4 mr-2" />
+                Edit
+              </Button>
+            ) : (
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handleCancelContact}
+                  className="hover:shadow-md transition-shadow"
+                >
+                  <X className="w-4 h-4 mr-2" />
+                  Cancel
+                </Button>
+                <Button 
+                  size="sm"
+                  onClick={handleSaveContact}
+                  className="bg-green-600 hover:bg-green-700 hover:shadow-md transition-all"
+                >
+                  <Save className="w-4 h-4 mr-2" />
+                  Save
+                </Button>
+              </div>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
@@ -174,7 +215,7 @@ const TeacherProfile = () => {
               <Mail className="w-4 h-4" />
               Email
             </Label>
-            {isEditing ? (
+            {isEditingContact ? (
               <Input
                 id="email"
                 type="email"
@@ -192,7 +233,7 @@ const TeacherProfile = () => {
               <Phone className="w-4 h-4" />
               Phone
             </Label>
-            {isEditing ? (
+            {isEditingContact ? (
               <Input
                 id="phone"
                 value={profileData.phone}
@@ -209,7 +250,7 @@ const TeacherProfile = () => {
               <Home className="w-4 h-4" />
               Address
             </Label>
-            {isEditing ? (
+            {isEditingContact ? (
               <Textarea
                 id="address"
                 value={profileData.address}
