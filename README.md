@@ -70,57 +70,46 @@ yarn dev
 
 Visit http://localhost:3000 to see it in action.
 
-🧪 Testing the App
-- Resize the browser window to test responsive behavior.
+## 🧪 Testing the App
 
-- Use keyboard navigation and screen readers to test accessibility.
+- Resize the browser window to test responsive behavior.  
+- Use keyboard navigation and screen readers to test accessibility.  
+- Edit qualification fields and profile information to test form handling.  
 
-- Edit qualification fields and profile information to test form handling.
-
-📹 Loom Video Walkthrough
-📽️ Watch the Walkthrough on Loom
-
-- Codebase walkthrough
-
-- UI/UX improvements
-
-- Responsive layout showcase
-
-- Design decisions & development challenges
-
-- Component reusability and architecture
-
-🧠 Design Decisions
-- Tailwind CSS was chosen for rapid styling and consistency.
-
-- Component-driven development helps with reusability and easier maintenance.
-
-- Mobile-first ensures best performance and usability across all devices.
-
-- Dark and light spacing system to enhance clarity and reduce clutter.
-
-- TypeScript ensures type safety and better DX.
-
-🔐 Accessibility Highlights
-- Semantic HTML structure
-
-- Keyboard navigability
-
-- Sufficient color contrast and legible font sizes
-
-- Aria-labels and roles where applicable
-
-📝 Assumptions
-- Only admin users can edit teacher data
-
-- Rates are fixed per hour and editable by admin
-
-- Group qualifications were left blank in the mock data
-
-Scheduling does not involve real-time booking APIs (mock/static data)
+---
 
 
-👤 Author
-- Bhanu Aggarwal  
+## 🧠 Design Decisions
+
+- **Tailwind CSS** was chosen for rapid styling and consistency.  
+- **Component-driven development** helps with reusability and easier maintenance.  
+- **Mobile-first** ensures best performance and usability across all devices.  
+- **Clear spacing system** enhances clarity and visual balance.  
+- **TypeScript** ensures type safety and better developer experience.  
+
+---
+
+## 🔐 Accessibility Highlights
+
+- Semantic HTML structure  
+- Keyboard navigability  
+- Sufficient color contrast and legible font sizes  
+- ARIA labels and roles where applicable  
+
+---
+
+## 📝 Assumptions
+
+- Only admin users can edit teacher data  
+- Rates are fixed per hour and editable by admin  
+- Group qualifications were left blank in the mock data  
+- Scheduling does not involve real-time booking APIs (mock/static data)  
+
+---
+
+## 👤 Author
+
+**Bhanu Aggarwal**  
+[GitHub](https://github.com/bhanuhu) • [LinkedIn](https://linkedin.com/in/bhanua-ggarwal) • [Portfolio](https://conosle.netlify.app)
 
 
