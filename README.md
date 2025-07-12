@@ -1,73 +1,126 @@
-# Welcome to your Lovable project
+# 🎓 TeacherHub Modern – A Modernized Teacher Management Interface
 
-## Project info
+[Live Demo 🔗](https://teacher-hub-modern.lovable.app)
 
-**URL**: https://lovable.dev/projects/27efd826-1a0f-4cde-a0c4-0839e07fe260
+---
 
-## How can I edit this code?
+## 📌 Project Overview
 
-There are several ways of editing your application.
+**TeacherHub Modern** is a responsive, clean, and modern teacher management interface built with a focus on improving user experience and usability. This project reimagines the outdated legacy UI (as shown in the provided reference screenshot) using contemporary UI/UX practices and modern technologies.
 
-**Use Lovable**
+The application supports essential features such as profile management, qualification tracking, scheduling availability, and responsive calendar views—all within a seamless, accessible, and intuitive interface.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/27efd826-1a0f-4cde-a0c4-0839e07fe260) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Tech Stack
 
-**Use your preferred IDE**
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Deployment:** [Vercel](https://vercel.com/)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🌟 Features
 
-Follow these steps:
+- ✅ **Responsive layout** with a mobile-first design
+- ✅ **Profile Management:** Editable fields for teacher details, email, phone, and address
+- ✅ **Qualifications Display:** Tables for Private and Group qualifications with rates
+- ✅ **Schedule Calendar:** Weekly availability and lesson grid with hover interactivity
+- ✅ **Modern UI/UX Design:** Clean layout, smart spacing, smooth transitions
+- ✅ **Accessibility:** Keyboard and screen reader friendly
+- ✅ **Component-based architecture** with reusable UI components
+- ✅ **Form validation & error handling**
+- ✅ **Touch-optimized mobile interactions**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🧩 Project Structure
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+teacher-hub-modern/
+│
+├── components/       # Reusable UI components (Cards, Tables, Inputs, Tabs, etc.)
+├── pages/            # Next.js pages
+├── styles/           # Tailwind configuration & global styles
+├── types/            # TypeScript types and interfaces
+├── utils/            # Utility functions
+├── public/           # Static assets
+└── README.md         # You're here!
+```
+🚀 Getting Started
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+1. Clone the repository
+```bash
+git clone https://github.com/your-username/teacher-hub-modern.git
+cd teacher-hub-modern
+```
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+3. Run the development server
+```bash
 npm run dev
+# or
+yarn dev
 ```
 
-**Edit a file directly in GitHub**
+Visit http://localhost:3000 to see it in action.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+🧪 Testing the App
+- Resize the browser window to test responsive behavior.
 
-**Use GitHub Codespaces**
+- Use keyboard navigation and screen readers to test accessibility.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Edit qualification fields and profile information to test form handling.
 
-## What technologies are used for this project?
+📹 Loom Video Walkthrough
+📽️ Watch the Walkthrough on Loom
 
-This project is built with:
+- Codebase walkthrough
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- UI/UX improvements
 
-## How can I deploy this project?
+- Responsive layout showcase
 
-Simply open [Lovable](https://lovable.dev/projects/27efd826-1a0f-4cde-a0c4-0839e07fe260) and click on Share -> Publish.
+- Design decisions & development challenges
 
-## Can I connect a custom domain to my Lovable project?
+- Component reusability and architecture
 
-Yes, you can!
+🧠 Design Decisions
+- Tailwind CSS was chosen for rapid styling and consistency.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- Component-driven development helps with reusability and easier maintenance.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Mobile-first ensures best performance and usability across all devices.
+
+- Dark and light spacing system to enhance clarity and reduce clutter.
+
+- TypeScript ensures type safety and better DX.
+
+🔐 Accessibility Highlights
+- Semantic HTML structure
+
+- Keyboard navigability
+
+- Sufficient color contrast and legible font sizes
+
+- Aria-labels and roles where applicable
+
+📝 Assumptions
+- Only admin users can edit teacher data
+
+- Rates are fixed per hour and editable by admin
+
+- Group qualifications were left blank in the mock data
+
+Scheduling does not involve real-time booking APIs (mock/static data)
+
+
+👤 Author
+- Bhanu Aggarwal  
+
+
