@@ -17,7 +17,7 @@ The application supports essential features such as profile management, qualific
 - **Framework:** [Next.js](https://nextjs.org/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Deployment:** [Vercel](https://vercel.com/)
+- **Deployment:** [Vercel](https://lovable.com/)
 
 ---
 
